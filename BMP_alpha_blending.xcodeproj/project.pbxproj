@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FACC3DC1245BFFE600EEA44C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FACC3DC0245BFFE600EEA44C /* main.cpp */; };
+		FACC3DC9245CCBA900EEA44C /* BMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FACC3DC7245CCBA900EEA44C /* BMP.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		FACC3DBD245BFFE600EEA44C /* BMP_alpha_blending */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BMP_alpha_blending; sourceTree = BUILT_PRODUCTS_DIR; };
 		FACC3DC0245BFFE600EEA44C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FACC3DC7245CCBA900EEA44C /* BMP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BMP.cpp; sourceTree = "<group>"; };
+		FACC3DC8245CCBA900EEA44C /* BMP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BMP.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				FACC3DC0245BFFE600EEA44C /* main.cpp */,
+				FACC3DC7245CCBA900EEA44C /* BMP.cpp */,
+				FACC3DC8245CCBA900EEA44C /* BMP.hpp */,
 			);
 			path = BMP_alpha_blending;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FACC3DC1245BFFE600EEA44C /* main.cpp in Sources */,
+				FACC3DC9245CCBA900EEA44C /* BMP.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +245,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Debug;
 		};
@@ -247,7 +256,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Release;
 		};

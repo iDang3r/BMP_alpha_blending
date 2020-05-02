@@ -8,6 +8,26 @@
 
 #include "BMP.hpp"
 
+int main1(int argc, const char * argv[]) {
+
+    BMP image_red  ("/Users/alex/Desktop/red.bmp");
+    BMP image_green("/Users/alex/Desktop/green.bmp");
+    BMP image_blue ("/Users/alex/Desktop/blue.bmp");
+
+    image_red.blend(image_green);
+    image_red.blend(image_blue);
+
+    image_red.write("/Users/alex/Desktop/circles.bmp");
+
+    image_red.close();
+    image_green.close();
+    image_blue.close();
+
+    cout << "OK" << endl;
+
+    return 0;
+}
+
 int main(int argc, const char * argv[]) {
     
     BMP image("/Users/alex/Desktop/zxc.bmp");

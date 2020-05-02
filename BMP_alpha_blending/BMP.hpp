@@ -130,5 +130,4 @@ private:
     
 };
 
-
 #endif /* BMP_hpp */

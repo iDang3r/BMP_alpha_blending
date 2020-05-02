@@ -291,16 +291,17 @@ int BMP::blend_xmm_(const BMP& im_up) {
     
     for (int i = 0; i < image_size; i += 4) {
         
-        __m128i low_front = _mm_load_si128((__m128i*) (image_up + i *4));
-        __m128i low_back  = _mm_load_si128((__m128i*) (image + i *4));
+        __m128i low_front = _mm_load_si128((__m128i*) (image_up + (i << 2)));
+        __m128i low_back  = _mm_load_si128((__m128i*) (image + (i << 2)));
     
         __m128i high_front = _mm_srli_si128(low_front, 8);
         __m128i high_back  = _mm_srli_si128(low_back,  8);
     
-        low_front = _mm_cvtepu8_epi16(low_front);
-        low_back  = _mm_cvtepu8_epi16(low_back);
+        low_front  = _mm_cvtepu8_epi16(low_front);
+        low_back   = _mm_cvtepu8_epi16(low_back);
         high_front = _mm_cvtepu8_epi16(high_front);
         high_back  = _mm_cvtepu8_epi16(high_back);
+        
         __m128i mask = _mm_set_epi8(128, 128, 128, 128, 128, 128,128, 128, 14, 14, 14, 14, 6, 6, 6, 6);
         __m128i low_alpha  = _mm_shuffle_epi8(low_front,  mask);
         __m128i high_alpha = _mm_shuffle_epi8(high_front, mask);
@@ -308,13 +309,16 @@ int BMP::blend_xmm_(const BMP& im_up) {
         __m128i not_low_alpha = _mm_set1_epi8((char)255);
         not_low_alpha = _mm_andnot_si128(low_alpha, not_low_alpha);
 //           not_low_alpha = _mm_sub_epi16(not_low_alpha, low_alpha);
+        
         __m128i not_high_alpha = _mm_set1_epi8((char)255);
         not_high_alpha = _mm_andnot_si128(high_alpha, not_high_alpha);
 //           not_high_alpha = _mm_sub_epi16(not_high_alpha, high_alpha);
+        
         low_alpha = _mm_cvtepu8_epi16(low_alpha);
         not_low_alpha = _mm_cvtepu8_epi16(not_low_alpha);
         high_alpha = _mm_cvtepu8_epi16(high_alpha);
         not_high_alpha = _mm_cvtepu8_epi16(not_high_alpha);
+        
         low_front  = _mm_mullo_epi16(low_front, low_alpha);
         low_back   = _mm_mullo_epi16(low_back,  not_low_alpha);
         high_front = _mm_mullo_epi16(high_front, high_alpha);
@@ -325,8 +329,9 @@ int BMP::blend_xmm_(const BMP& im_up) {
         mask = _mm_set_epi8(128, 128, 128, 128, 128, 128, 128, 128,15, 13, 11, 9, 7, 5, 3, 1);
         low_front  = _mm_shuffle_epi8(low_front, mask);
         high_front = _mm_shuffle_epi8(high_front, mask);
+        
         high_front = _mm_movelh_ps(low_front, high_front);
-        _mm_storeu_si128((__m128i*) (image + i * 4), high_front);
+        _mm_storeu_si128((__m128i*) (image + (i << 2)), high_front);
     }
     
     memcpy(image_start_, image, image_size << 2);
@@ -350,10 +355,12 @@ int BMP::get_buffer(FILE* file) {
         errno_ = MEMORY_WAS_NOT_ALLOCATED;
         return MEMORY_WAS_NOT_ALLOCATED;
     }
+    
     size_t got_size = fread(buff_, sizeof(char), buff_size_, file);
     if (buff_size_ != got_size) {
         errno_ = FATAL_ERROR;
         return FATAL_ERROR;
     }
+    
     return OK;
 }

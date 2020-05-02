@@ -28,6 +28,8 @@
 		FACC3DC0245BFFE600EEA44C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FACC3DC7245CCBA900EEA44C /* BMP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BMP.cpp; sourceTree = "<group>"; };
 		FACC3DC8245CCBA900EEA44C /* BMP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BMP.hpp; sourceTree = "<group>"; };
+		FACC3DDE245DF4F200EEA44C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FACC3DDF245DF4F200EEA44C /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,8 @@
 		FACC3DB4245BFFE600EEA44C = {
 			isa = PBXGroup;
 			children = (
+				FACC3DDF245DF4F200EEA44C /* Images */,
+				FACC3DDE245DF4F200EEA44C /* README.md */,
 				FACC3DBF245BFFE600EEA44C /* BMP_alpha_blending */,
 				FACC3DBE245BFFE600EEA44C /* Products */,
 			);

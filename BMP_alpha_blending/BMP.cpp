@@ -139,7 +139,7 @@ void BMP::get_error_message() {
             break;
             
         case INCORRECT_COLORS_COUNT:
-            cout << "Programm supports working only with fullcoloredimages" << endl;
+            cout << "Programm supports working only with fullcolored images" << endl;
             break;
             
         case IMAGES_SIZES_ARE_NOT_EQ:

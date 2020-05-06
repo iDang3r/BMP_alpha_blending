@@ -15,7 +15,11 @@
 #include <immintrin.h>
 #include <emmintrin.h>
 #include <iomanip>
-using namespace std;
+using std::cin;
+using std::cout;
+using std::dec;
+using std::hex;
+using std::endl;
 
 typedef unsigned char  u_char;
 typedef unsigned int   u_int;

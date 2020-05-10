@@ -10,13 +10,13 @@
 
 int main(int argc, const char * argv[]) {
     
-    BMP image("/Users/alex/Desktop/zxc.bmp");
-    BMP image_up("/Users/alex/Desktop/kot.bmp");
+    BMP image("Images/field.bmp");
+    BMP image_up("Images/kot.bmp");
     
 //    image.blend(image_up);
     image.blend_xmm(image_up);
     
-    image.write("/Users/alex/Desktop/kot_copy.bmp");
+    image.write("Images/kot_copy.bmp");
     
     image.close();
     image_up.close();

@@ -21,6 +21,8 @@ using std::dec;
 using std::hex;
 using std::endl;
 
+#define endl "\n"
+
 typedef unsigned char  u_char;
 typedef unsigned int   u_int;
 typedef unsigned short u_short;
@@ -84,25 +86,19 @@ private:
     #pragma pack(push, 1)
     class Pixel {
     public:
+        /* <<---- FIELDS ---->> */
         
         u_char blue_;
         u_char green_;
         u_char red_;
         u_char alpha_;
         
+        /* <<---- METHODS ---->> */
+        
         Pixel()  = default;
         ~Pixel() = default;
         
-        void print(bool hex = false) {
-            
-            if (hex)
-                cout << hex;
-            
-            cout << (int)red_ << "." << (int)green_ << "." << (int)blue_ << "." << (int)alpha_ << endl;
-            
-            if (hex)
-                cout << dec;
-        }
+        void print();
     };
     #pragma pack(pop)
     

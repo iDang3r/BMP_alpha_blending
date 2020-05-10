@@ -14,9 +14,9 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		FACC3DBB245BFFE600EEA44C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 8;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -30,6 +30,7 @@
 		FACC3DC8245CCBA900EEA44C /* BMP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BMP.hpp; sourceTree = "<group>"; };
 		FACC3DDE245DF4F200EEA44C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FACC3DDF245DF4F200EEA44C /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		FAE9792324689FDD00DE1684 /* BMP_alpha_blending.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = BMP_alpha_blending.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +47,7 @@
 		FACC3DB4245BFFE600EEA44C = {
 			isa = PBXGroup;
 			children = (
+				FAE9792324689FDD00DE1684 /* BMP_alpha_blending.xcodeproj */,
 				FACC3DDF245DF4F200EEA44C /* Images */,
 				FACC3DDE245DF4F200EEA44C /* README.md */,
 				FACC3DBF245BFFE600EEA44C /* BMP_alpha_blending */,
@@ -69,6 +71,11 @@
 				FACC3DC8245CCBA900EEA44C /* BMP.hpp */,
 			);
 			path = BMP_alpha_blending;
+			sourceTree = "<group>";
+		};
+		FAE9792424689FDD00DE1684 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,6 +123,12 @@
 			mainGroup = FACC3DB4245BFFE600EEA44C;
 			productRefGroup = FACC3DBE245BFFE600EEA44C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FAE9792424689FDD00DE1684 /* Products */;
+					ProjectRef = FAE9792324689FDD00DE1684 /* BMP_alpha_blending.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FACC3DBC245BFFE600EEA44C /* BMP_alpha_blending */,

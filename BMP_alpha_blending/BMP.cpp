@@ -8,7 +8,8 @@
 
 #include "BMP.hpp"
 
-#define wp(x) cout << setw(13) << #x << ": "; printf("%02vx\n", x);
+#define w_xmm(x)                        \
+    printf("%13s: %02vx\n", #x, x);     \
 
 enum ERRORS {
         
@@ -151,8 +152,9 @@ void BMP::get_error_message() {
             break;
     }
     
-    if (errno_)
-        exit(0);
+    if (errno_) {
+        exit(1);
+    }
     
     errno_ = OK;
 }
@@ -371,4 +373,10 @@ int BMP::get_buffer(FILE* file) {
     }
     
     return OK;
+}
+
+void BMP::Pixel::print() {
+    
+    printf("%02x.%02x.%02x.%02x\n", red_, green_, blue_, alpha_);
+    
 }

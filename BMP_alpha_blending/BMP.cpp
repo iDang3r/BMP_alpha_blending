@@ -250,19 +250,27 @@ int BMP::write_(const char* name_of_file) {
 
 int BMP::blend_(const BMP& im_up) {
     
-    for (int i = 0; i < 600 * 800; i++) {
+    if (im_up.signature->height_ != signature->height_ || im_up.signature->width_ != signature->width_) {
+        errno_ = IMAGES_SIZES_ARE_NOT_EQ;
+        return IMAGES_SIZES_ARE_NOT_EQ;
+    }
+    
+    size_t image_size = im_up.signature->height_ * im_up.signature->width_;
+    
+    for (int i = 0; i < image_size; i++) {
         
-        short int x1, x2, x3, x4, a;
-        short int y1, y2, y3, y4;
-        x1 = image_start_[i].red_;
-        x2 = image_start_[i].green_;
-        x3 = image_start_[i].blue_;
-        x4 = image_start_[i].alpha_;
+        short int
+        x1 = image_start_[i].red_,
+        x2 = image_start_[i].green_,
+        x3 = image_start_[i].blue_,
+        x4 = image_start_[i].alpha_,
         
-        y1 = im_up.image_start_[i].red_;
-        y2 = im_up.image_start_[i].green_;
-        y3 = im_up.image_start_[i].blue_;
-    a = y4 = im_up.image_start_[i].alpha_;
+        y1 = im_up.image_start_[i].red_,
+        y2 = im_up.image_start_[i].green_,
+        y3 = im_up.image_start_[i].blue_,
+        y4 = im_up.image_start_[i].alpha_,
+        
+        a  = im_up.image_start_[i].alpha_;
         
         image_start_[i].red_   = (y1 * a + x1 * (255 - a)) >> 8;
         image_start_[i].green_ = (y2 * a + x2 * (255 - a)) >> 8;
@@ -276,12 +284,12 @@ int BMP::blend_(const BMP& im_up) {
 
 int BMP::blend_xmm_(const BMP& im_up) {
     
-    if (im_up.signature->height_ != signature->height_ ||im_up.signature->width_ != signature->width_) {
+    if (im_up.signature->height_ != signature->height_ || im_up.signature->width_ != signature->width_) {
         errno_ = IMAGES_SIZES_ARE_NOT_EQ;
         return IMAGES_SIZES_ARE_NOT_EQ;
     }
     
-    size_t image_size = im_up.signature->height_ *im_up.signature->width_;
+    size_t image_size = im_up.signature->height_ * im_up.signature->width_;
     
     char* image_up = (char*)calloc(image_size << 2, sizeof(char));
     memcpy(image_up, im_up.image_start_, image_size << 2);
@@ -292,7 +300,7 @@ int BMP::blend_xmm_(const BMP& im_up) {
     for (int i = 0; i < image_size; i += 4) {
         
         __m128i low_front = _mm_load_si128((__m128i*) (image_up + (i << 2)));
-        __m128i low_back  = _mm_load_si128((__m128i*) (image + (i << 2)));
+        __m128i low_back  = _mm_load_si128((__m128i*) (image    + (i << 2)));
     
         __m128i high_front = _mm_srli_si128(low_front, 8);
         __m128i high_back  = _mm_srli_si128(low_back,  8);

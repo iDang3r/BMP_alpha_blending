@@ -6,6 +6,12 @@
 //  Copyright © 2020 Alex. All rights reserved.
 //
 
+#ifdef DEBUG
+    #define $DBG if (1)
+#else
+    #define $DBG if (0)
+#endif
+
 #include "BMP.hpp"
 
 #define w_xmm(x)                        \
@@ -312,7 +318,9 @@ int BMP::blend_xmm_(const BMP& im_up) {
         high_front = _mm_cvtepu8_epi16(high_front);
         high_back  = _mm_cvtepu8_epi16(high_back);
         
-        __m128i mask = _mm_set_epi8(128, 128, 128, 128, 128, 128,128, 128, 14, 14, 14, 14, 6, 6, 6, 6);
+        $DBG w_xmm(low_front)
+        
+        __m128i mask = _mm_set_epi8(128, 128, 128, 128, 128, 128, 128, 128, 14, 14, 14, 14, 6, 6, 6, 6);
         __m128i low_alpha  = _mm_shuffle_epi8(low_front,  mask);
         __m128i high_alpha = _mm_shuffle_epi8(high_front, mask);
         
@@ -329,12 +337,14 @@ int BMP::blend_xmm_(const BMP& im_up) {
         high_alpha = _mm_cvtepu8_epi16(high_alpha);
         not_high_alpha = _mm_cvtepu8_epi16(not_high_alpha);
         
-        low_front  = _mm_mullo_epi16(low_front, low_alpha);
-        low_back   = _mm_mullo_epi16(low_back,  not_low_alpha);
+        low_front  = _mm_mullo_epi16(low_front,  low_alpha);
+        low_back   = _mm_mullo_epi16(low_back,   not_low_alpha);
+        
         high_front = _mm_mullo_epi16(high_front, high_alpha);
         high_back  = _mm_mullo_epi16(high_back,  not_high_alpha);
-        low_front  = _mm_add_epi16(low_front,  low_back);
-        high_front = _mm_add_epi16(high_front, high_back);
+        
+        low_front  = _mm_add_epi16(low_front,    low_back);
+        high_front = _mm_add_epi16(high_front,   high_back);
         
         mask = _mm_set_epi8(128, 128, 128, 128, 128, 128, 128, 128,15, 13, 11, 9, 7, 5, 3, 1);
         low_front  = _mm_shuffle_epi8(low_front, mask);
